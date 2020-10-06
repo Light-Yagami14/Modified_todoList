@@ -5,12 +5,7 @@ import Notes from "./Notes";
 import CreateArea from "./CreateArea";
 
 function App() {
-  const [notes, setNotes] = useState([
-    {
-      title: "addItem",
-      content: "content added"
-    }
-  ]);
+  const [notes, setNotes] = useState([]);
 
   function addItem(item) {
     console.log(item);

@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import PostAddIcon from '@material-ui/icons/PostAdd';
+import Fab from '@material-ui/core/Fab';
+import Zoom from '@material-ui/core/Zoom';
 
 function CreateArea(props) {
+  const [isClicked,setIsClicked] = useState(false);
   const [fullNote, setFullNote] = useState({
     title: "",
     content: ""
@@ -21,25 +25,35 @@ function CreateArea(props) {
       title: "",
       content: ""
     });
+    setIsClicked(false);
   }
 
   return (
     <div>
-      <form>
+      <form className="create-note">
         <input
+         onClick={()=>{
+            setIsClicked(true);
+          }}
           onChange={changeHandler}
           name="title"
-          placeholder="Title"
+          placeholder={isClicked?"Title":"Take a note..."}
           value={fullNote.title}
         />
+        {isClicked&&
         <textarea
           onChange={changeHandler}
           name="content"
           placeholder="Take a note..."
-          rows="3"
+          rows={isClicked?"4":"1"}
           value={fullNote.content}
         />
-        <button onClick={submitNote}>Add</button>
+        }
+        <Zoom in={isClicked}>
+        <Fab onClick={submitNote}>
+          <PostAddIcon />
+        </Fab>
+        </Zoom>
       </form>
     </div>
   );
